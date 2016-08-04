@@ -11,3 +11,8 @@ JavaScript библиотека для токенизации карточных
 
 ## Использование
 Пример использования можно посмотреть [тут](/sample/index.html)
+
+## Пример Docker развертки
+
+    docker build -t <your name>/tokenizer .
+    docker run --rm -it --name tokenizer -p 7000:7000 <your name>/tokenizer
