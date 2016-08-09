@@ -4,6 +4,7 @@ const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
+const connect = require('gulp-connect');
 
 gulp.task('build', () => {
     return browserify({
@@ -22,4 +23,30 @@ gulp.task('uglify', ['build'], () => {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['build', 'uglify']);
+gulp.task('provider', () => {
+    return gulp.src(['src/provider.html'])
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('connectDist', () => {
+    connect.server({
+        root: 'dist',
+        host: '127.0.0.1',
+        port: 7000
+    });
+});
+
+gulp.task('connectSample', () => {
+    connect.server({
+        root: 'sample',
+        host: '127.0.0.1',
+        port: 7001
+    });
+});
+
+gulp.task('watch', () => {
+    gulp.watch('src/**/*', ['build', 'uglify', 'provider']);
+});
+
+gulp.task('develop', ['build', 'uglify', 'provider', 'connectDist', 'watch', 'connectSample']);
+gulp.task('default', ['build', 'uglify', 'provider']);

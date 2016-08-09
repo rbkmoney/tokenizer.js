@@ -8,39 +8,20 @@
     <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
             integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
 
-    <script type="application/javascript" src="../dist/tokenizer.min.js"></script>
+    <script type="application/javascript" src="http://localhost:7000/tokenizer.min.js"></script>
 
     <script>
-        var capiUrl = 'http://localhost:8022/v1/';
-        var token = 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkZWMxMmZhYy00MTMyLTQ1NjEtYWM3Ni0xMzMwODQyYWVkYWIiLCJleHAiOjE0NzA4MzcxNjMs' +
-                'Im5iZiI6MCwiaWF0IjoxNDY4MjQ1MTYzLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMzAvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJhdWQiOiJtZXJjaGFudGdhdGUiLCJzdWI' +
-                'iOiJkZjQ1NTk3YS0wZmVmLTQzZjUtOTRmOS1kY2RmNmExOGM0YTMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJtZXJjaGFudGdhdGUiLCJzZXNzaW9uX3N0YXRlIjoiMzFiMjRiNm' +
-                'MtNGNjZS00NjIxLWI3NGMtYjVlNmJlZjZkNWRlIiwiY2xpZW50X3Nlc3Npb24iOiJlNDliODU2Zi1iZTU0LTQyMzMtOTJhZC04Y2E4Mjk0MzFhMzEiLCJhbGxvd2VkLW9yaWdpb' +
-                'nMiOltdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJjb21tb24tYXBpIjp7InJvbGVzIjpbImludm9p' +
-                'Y2VzOmNyZWF0ZSIsInBheW1lbnRzOmNyZWF0ZSIsImludm9pY2VzOmdldCIsInBheW1lbnRfdG9vbF90b2tlbnM6Y3JlYXRlIiwicHJvZmlsZXM6Y3JlYXRlIiwicGF5bWVudHM' +
-                '6Z2V0IiwicHJvZmlsZXM6dXBkYXRlIiwiaW52b2ljZXMuZXZlbnRzOmdldCJdfSwicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycy' +
-                'IsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2Vyc' +
-                'yIsInZpZXctYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5h' +
-                'Z2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwibmFtZSI6InR' +
-                'lc3QgVGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6Im1lcmNoYW50IiwiZ2l2ZW5fbmFtZSI6InRlc3QiLCJmYW1pbHlfbmFtZSI6IlRlc3QiLCJlbWFpbCI6Im1lcmNoYW50QG' +
-                'RlbW8uY29tIn0.cxJvk4etzmblAROqzmSJo-OhfQ70aXd-_5ttbYSTafF3dtp0OUA2RIvkjn7X2yX4lSMNFvYG-9gARGC1icRHTkc18tskWLD3V2-CEtnd1lHB86CKuxVnhHw4l' +
-                'DjORaHDEjMerGLZrSQjxRtDraNrIKzG6TZWAsFnlQoJaN6u5l7mngx70z-i4B_Ty4i-TRnnIVEivLyRyNOcPGNBj_ExRCUfdTmGkWcQq_OiEhtvcZLmb_FYtPPNmtWHGhzNFkXc' +
-                'z1s1xioG_uPdPaO_2GPbDaIoAEcL2tqhfY4QXz31oL5XMe9qtvXK0lMg4Hx738GjDRRdAjoEGZiX9FFOum1LLg';
-
         $(function () {
             $('#request-result').hide();
             $('#pay-button').click(function () {
-                var tokenizer = new Tokenizer(capiUrl, token);
-                tokenizer.card.createToken({
+                Tokenizer.card.createToken({
                     "paymentToolType": "CardData",
                     "cardHolder": $('#card-holder').val(),
                     "cardNumber": $('#card-number').val(),
                     "expDate": $('#exp-date').val(),
                     "cvv": $('#cvv').val()
-                }).then(function (result) {
+                }, function (result) {
                     $('#request-result').removeClass('alert-danger').addClass('alert-success').show().text(JSON.stringify(result));
-                }).catch(function (error) {
-                    $('#request-result').removeClass('alert-success').addClass('alert-danger').show().text(error.message);
                 });
             });
         });
