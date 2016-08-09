@@ -22,6 +22,8 @@
                     "cvv": $('#cvv').val()
                 }, function (result) {
                     $('#request-result').removeClass('alert-danger').addClass('alert-success').show().text(JSON.stringify(result));
+                }, function (error) {
+                    $('#request-result').removeClass('alert-success').addClass('alert-danger').show().text(JSON.stringify(error.message));
                 });
             });
         });
