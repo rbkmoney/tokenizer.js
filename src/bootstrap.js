@@ -2,16 +2,19 @@ import RpcProvider from './RpcProvider';
 import RpcConsumer from './RpcConsumer';
 import settings from './settings';
 import polyfill from './polyfill';
+import Fingerprint from 'fingerprintjs2';
 
 (function () {
     polyfill();
     if (settings.host.includes(window.location.host)) {
-        RpcProvider.initProvider();
+        new RpcProvider();
     } else {
-        const rpc = RpcConsumer.initConsumer();
+        let fingerprint = '';
+        new Fingerprint().get(result => fingerprint = result);
+        const rpc = new RpcConsumer();
         window.Tokenizer = {
             card: {
-                createToken: rpc.createToken
+                createToken: (cardData, success, error) => rpc.createToken(cardData, fingerprint, success, error)
             }
         };
     }

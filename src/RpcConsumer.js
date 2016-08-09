@@ -2,7 +2,7 @@ import 'madlib-shim-easyxdm';
 import settings from './settings'
 
 export default class {
-    static initConsumer() {
+    constructor() {
         return new easyXDM.Rpc({
             remote: settings.host + '/provider.html'
         }, {

@@ -4,7 +4,8 @@ import settings from './settings'
 
 export default class {
 
-    static createToken(cardData, success, error) {
+    static createToken(cardData, fingerprint, success, error) {
+        cardData ? cardData['fingerprint'] = fingerprint : {};
         fetch(settings.capiUrl + '/payment_tools', {
             method: 'POST',
             headers: {

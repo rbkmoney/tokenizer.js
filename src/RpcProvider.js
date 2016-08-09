@@ -2,7 +2,7 @@ import 'madlib-shim-easyxdm';
 import CardTokenizer from './CardTokenizer';
 
 export default class {
-    static initProvider() {
+    constructor() {
         new easyXDM.Rpc({},
             {
                 local: {
