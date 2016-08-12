@@ -1,5 +1,5 @@
 import 'madlib-shim-easyxdm';
-import settings from './settings'
+import settings from '../settings'
 
 export default class {
     constructor() {

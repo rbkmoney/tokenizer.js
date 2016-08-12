@@ -1,7 +1,6 @@
 export default {
     token: '',
-
     capiUrl: '',
-
-    host: ''
+    host: '',
+    geoProviderUrl: 'https://api.ipify.org?format=json'
 };

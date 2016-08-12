@@ -1,11 +1,10 @@
 import 'whatwg-fetch';
 import uuid from 'uuid-js';
-import settings from './settings'
+import settings from '../settings'
 
 export default class {
 
-    static createToken(cardData, fingerprint, success, error) {
-        cardData ? cardData['fingerprint'] = fingerprint : {};
+    static createToken(cardData, success, error) {
         fetch(settings.capiUrl + '/payment_tools', {
             method: 'POST',
             headers: {
