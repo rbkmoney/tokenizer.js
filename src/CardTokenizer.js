@@ -1,30 +1,26 @@
 import 'whatwg-fetch';
 import uuid from 'uuid-js';
+import settings from './settings'
 
 export default class {
-    constructor(capi, token) {
-        this._capi = capi;
-        this._token = token;
-    }
 
-    createToken(cardData) {
-        return new Promise((resolve, reject) => {
-            fetch(this._capi + 'payment_tools', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-Request-ID': uuid.create(),
-                    'Authorization': 'Bearer ' + this._token
-                },
-                body: JSON.stringify(cardData)
-            }).then(response => {
-                if (response.status >= 200 && response.status < 300) {
-                    resolve(response.json());
-                } else {
-                    response.json().then(error => reject(error));
-                }
-            });
-        })
+    static createToken(cardData, fingerprint, success, error) {
+        cardData ? cardData['fingerprint'] = fingerprint : {};
+        fetch(settings.capiUrl + '/payment_tools', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-Request-ID': uuid.create(),
+                'Authorization': 'Bearer ' + settings.token
+            },
+            body: JSON.stringify(cardData)
+        }).then(response => {
+            if (response.status >= 200 && response.status < 300) {
+                response.json().then(result => success(result));
+            } else {
+                response.json().then(result => error(result));
+            }
+        });
     }
 }
