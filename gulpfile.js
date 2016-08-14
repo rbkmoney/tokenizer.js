@@ -5,8 +5,15 @@ const source = require('vinyl-source-stream');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const connect = require('gulp-connect');
+const eslint = require('gulp-eslint');
 
-gulp.task('build', () => {
+gulp.task('lint', () => {
+    return gulp.src('src/**/*.js')
+        .pipe(eslint())
+        .pipe(eslint.format());
+});
+
+gulp.task('browserify', ['lint'], () => {
     return browserify({
         entries: 'src/bootstrap.js',
         extensions: ['.js'],
@@ -16,7 +23,7 @@ gulp.task('build', () => {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('uglify', ['build'], () => {
+gulp.task('uglify', ['browserify'], () => {
     return gulp.src('dist/tokenizer.js')
         .pipe(rename('tokenizer.min.js'))
         .pipe(uglify())
@@ -24,7 +31,7 @@ gulp.task('uglify', ['build'], () => {
 });
 
 gulp.task('provider', () => {
-    return gulp.src(['src/provider.html'])
+    return gulp.src(['src/rpc/provider.html'])
         .pipe(gulp.dest('dist'));
 });
 
@@ -45,8 +52,9 @@ gulp.task('connectSample', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('src/**/*', ['build', 'uglify', 'provider']);
+    gulp.watch('src/**/*', ['build']);
 });
 
-gulp.task('develop', ['build', 'uglify', 'provider', 'connectDist', 'watch', 'connectSample']);
-gulp.task('default', ['build', 'uglify', 'provider']);
+gulp.task('build', ['uglify', 'provider']);
+gulp.task('develop', ['build', 'connectDist', 'watch', 'connectSample']);
+gulp.task('default', ['build']);

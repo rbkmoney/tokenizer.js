@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import settings from '../settings'
+import settings from '../settings';
 
 export default class {
     static get() {

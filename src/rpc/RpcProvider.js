@@ -1,3 +1,4 @@
+/* global easyXDM:true */
 import 'madlib-shim-easyxdm';
 import CardTokenizer from '../tokenizers/CardTokenizer';
 

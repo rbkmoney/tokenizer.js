@@ -4,7 +4,7 @@ import ClientInfo from './clientInfo/ClientInfo';
 import settings from './settings';
 import includes from './polyfills/includes';
 
-(function () {
+(function init() {
     includes();
     if (settings.host.includes(window.location.host)) {
         new RpcProvider();
@@ -15,9 +15,9 @@ import includes from './polyfills/includes';
             card: {
                 createToken: (cardData, success, error) => {
                     const request = clientInfo.extendRequest(cardData);
-                    rpc.createToken(request, success, error)
+                    rpc.createToken(request, success, error);
                 }
             }
         };
     }
-})();
+}());
