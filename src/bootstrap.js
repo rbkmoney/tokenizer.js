@@ -14,7 +14,10 @@ import includes from './polyfills/includes';
         window.Tokenizer = {
             card: {
                 createToken: (cardData, success, error) => {
-                    const request = clientInfo.extendRequest(cardData);
+                    const request = {
+                        paymentTool: cardData,
+                        clientInfo: clientInfo.getInfo()
+                    };
                     rpc.createToken(request, success, error);
                 }
             }

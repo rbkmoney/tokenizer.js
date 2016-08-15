@@ -9,11 +9,10 @@ export default class {
         Geoinfo.get().then(result => this.ipAddress = result.ip);
     }
 
-    extendRequest(request) {
-        return request ? (data => {
-            data.fingerprint = this.fingerprint;
-            data.ipAddress = this.ipAddress;
-            return data;
-        })(request) : {};
+    getInfo() {
+        return {
+            fingerprint: this.fingerprint,
+            ipAddress: this.ipAddress
+        }
     }
 }
