@@ -7,6 +7,10 @@ const rename = require('gulp-rename');
 const connect = require('gulp-connect');
 const eslint = require('gulp-eslint');
 
+const config = {
+    dist: 'dist/tokenizer'
+};
+
 gulp.task('lint', () => {
     return gulp.src('src/**/*.js')
         .pipe(eslint())
@@ -20,19 +24,19 @@ gulp.task('browserify', ['lint'], () => {
         debug: true
     }).transform("babelify").bundle()
         .pipe(source('tokenizer.js'))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('uglify', ['browserify'], () => {
-    return gulp.src('dist/tokenizer.js')
+    return gulp.src(`${config.dist}/tokenizer.js`)
         .pipe(rename('tokenizer.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('provider', () => {
     return gulp.src(['src/rpc/provider.html'])
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('connectDist', () => {
