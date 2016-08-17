@@ -1,5 +1,6 @@
+/* global easyXDM:true */
 import 'madlib-shim-easyxdm';
-import CardTokenizer from './CardTokenizer';
+import CardTokenizer from '../tokenizers/CardTokenizer';
 
 export default class {
     constructor() {

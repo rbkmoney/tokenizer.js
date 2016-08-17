@@ -8,14 +8,14 @@
     <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
             integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
 
-    <script type="application/javascript" src="http://localhost:7000/tokenizer.min.js"></script>
+    <script type="application/javascript" src="http://localhost:7000/tokenizer/tokenizer.js"></script>
 
     <script>
         $(function () {
             $('#request-result').hide();
             $('#pay-button').click(function () {
                 Tokenizer.card.createToken({
-                    "paymentToolType": "CardData",
+                    "paymentToolType": "cardData",
                     "cardHolder": $('#card-holder').val(),
                     "cardNumber": $('#card-number').val(),
                     "expDate": $('#exp-date').val(),
