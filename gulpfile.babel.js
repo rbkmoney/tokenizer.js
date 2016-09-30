@@ -1,11 +1,12 @@
-const gulp = require('gulp');
-const browserify = require('browserify');
-const babelify = require('babelify');
-const source = require('vinyl-source-stream');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const connect = require('gulp-connect');
-const eslint = require('gulp-eslint');
+import gulp from 'gulp';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
+import connect from 'gulp-connect';
+import eslint from 'gulp-eslint';
+import karma from 'karma';
 
 const config = {
     dist: 'dist/tokenizer'
@@ -37,6 +38,13 @@ gulp.task('uglify', ['browserify'], () => {
 gulp.task('provider', () => {
     return gulp.src(['src/rpc/provider.html'])
         .pipe(gulp.dest(config.dist));
+});
+
+gulp.task('test', done => {
+    const KarmaServer = karma.Server;
+    new KarmaServer({
+        configFile: `${__dirname}/karma.conf.js`
+    }, done).start();
 });
 
 gulp.task('connectDist', () => {
