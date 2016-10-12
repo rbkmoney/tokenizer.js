@@ -25,7 +25,7 @@ export default class CardTokenizer {
                 } else {
                     response.json().then(error => reject(error));
                 }
-            }).catch(error => reject('Refresh token error'));
+            }).catch(() => reject('Refresh token error'));
         });
     }
 
@@ -46,7 +46,7 @@ export default class CardTokenizer {
                 } else {
                     response.json().then(error => reject(error));
                 }
-            }).catch(error => reject('Tokenization error'));
+            }).catch(() => reject('Tokenization error'));
         });
     }
 }

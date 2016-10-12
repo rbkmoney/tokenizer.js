@@ -9,7 +9,7 @@ import eslint from 'gulp-eslint';
 import karma from 'karma';
 
 const config = {
-    dist: 'dist/tokenizer'
+    dist: 'dist'
 };
 
 gulp.task('lint', () => {
@@ -23,7 +23,7 @@ gulp.task('browserify', ['lint'], () => {
         entries: 'src/bootstrap.js',
         extensions: ['.js'],
         debug: true
-    }).transform("babelify").bundle()
+    }).transform('babelify').bundle()
         .pipe(source('tokenizer.js'))
         .pipe(gulp.dest(config.dist));
 });
