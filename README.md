@@ -1,4 +1,5 @@
 # Tokenizer.js
+[![Build Status](http://ci.rbkmoney.com/buildStatus/icon?job=rbkmoney_private/tokenizer.js/master)](http://ci.rbkmoney.com/job/rbkmoney_private/job/tokenizer.js/job/master)
 JavaScript библиотека для токенизации карточных данных клиентов.
 
 ## Настройка
