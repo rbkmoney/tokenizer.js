@@ -1,16 +1,18 @@
+import 'whatwg-fetch';
 import RpcProvider from './rpc/RpcProvider';
 import RpcConsumer from './rpc/RpcConsumer';
 import ClientInfo from './clientInfo/ClientInfo';
-import settings from './settings';
+import Utils from './utils/Utils';
 import includes from './polyfills/includes';
 
 (function init() {
     includes();
-    if (settings.host.includes(this.location.host)) {
+    const host = Utils.getScriptUrl();
+    if (host.includes(this.location.host)) {
         new RpcProvider();
     } else {
         const clientInfo = new ClientInfo();
-        const rpc = new RpcConsumer();
+        const rpc = new RpcConsumer(host);
         let publicKey;
         this.Tokenizer = {
             setPublicKey: key => (publicKey = key),

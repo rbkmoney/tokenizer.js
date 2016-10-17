@@ -1,0 +1,4 @@
+{
+  "capiUrl": "http://localhost:7051",
+  "keycloakUrl": "http://localhost:31245/auth"
+}
