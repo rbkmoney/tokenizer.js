@@ -1,11 +1,12 @@
 /* global easyXDM:true */
 import 'madlib-shim-easyxdm';
-import settings from '../settings';
+import Utils from '../utils/Utils';
 
 export default class {
-    constructor() {
+    constructor(host) {
+        const url = Utils.getOrigin(host);
         return new easyXDM.Rpc({
-            remote: `${settings.host}/provider.html`
+            remote: `${url}/provider.html`
         }, {
             remote: {
                 createToken: {}

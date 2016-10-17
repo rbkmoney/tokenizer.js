@@ -35,8 +35,8 @@ gulp.task('uglify', ['browserify'], () => {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('provider', () => {
-    return gulp.src(['src/rpc/provider.html'])
+gulp.task('copyStatic', () => {
+    return gulp.src(['src/rpc/provider.html', 'src/appConfig.json'])
         .pipe(gulp.dest(config.dist));
 });
 
@@ -64,9 +64,9 @@ gulp.task('connectSample', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('src/**/*', ['build']);
+    gulp.watch('src/**/*', ['build', 'copyStatic']);
 });
 
-gulp.task('build', ['uglify', 'provider']);
+gulp.task('build', ['uglify', 'copyStatic']);
 gulp.task('develop', ['build', 'connectDist', 'watch', 'connectSample']);
 gulp.task('default', ['build']);
