@@ -27,7 +27,7 @@ export default class CardTokenizer {
                 } else {
                     response.json().then(error => reject(error));
                 }
-            }).catch(() => reject('Refresh token error'));
+            }).catch(() => reject('Error request to keycloak'));
         });
     }
 
@@ -37,7 +37,7 @@ export default class CardTokenizer {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json; charset=utf-8',
                     'X-Request-ID': uuid.create(),
                     'Authorization': `Bearer ${token}`,
                 },
@@ -48,7 +48,7 @@ export default class CardTokenizer {
                 } else {
                     response.json().then(error => reject(error));
                 }
-            }).catch(() => reject('Tokenization error'));
+            }).catch(() => reject('Error request to CAPI'));
         });
     }
 }
