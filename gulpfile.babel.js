@@ -7,6 +7,7 @@ import rename from 'gulp-rename';
 import connect from 'gulp-connect';
 import eslint from 'gulp-eslint';
 import karma from 'karma';
+import cors from 'cors';
 
 const config = {
     dist: 'dist'
@@ -50,6 +51,9 @@ gulp.task('test', done => {
 gulp.task('connectDist', () => {
     connect.server({
         root: 'dist',
+        middleware: function() {
+            return [cors()];
+        },
         host: '127.0.0.1',
         port: 7000
     });
