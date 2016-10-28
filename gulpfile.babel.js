@@ -37,7 +37,7 @@ gulp.task('uglify', ['browserify'], () => {
 });
 
 gulp.task('copyStatic', () => {
-    return gulp.src(['src/rpc/provider.html', 'src/appConfig.json'])
+    return gulp.src(['src/rpc/provider.html', 'src/tokenizerConfig.json'])
         .pipe(gulp.dest(config.dist));
 });
 

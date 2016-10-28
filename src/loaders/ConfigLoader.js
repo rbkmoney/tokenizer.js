@@ -6,7 +6,7 @@ export default class ConfigLoader {
         const scriptUrl = Utils.getScriptUrl();
         const appConfigUrl = Utils.getOrigin(scriptUrl);
         return new Promise((resolve, reject) => {
-            fetch(`${appConfigUrl}/appConfig.json`, {
+            fetch(`${appConfigUrl}/tokenizerConfig.json`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
