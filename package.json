@@ -35,7 +35,6 @@
   "dependencies": {
     "fingerprintjs2": "^1.4.1",
     "madlib-shim-easyxdm": "^2.4.20-7",
-    "uuid-js": "^0.7.5",
     "whatwg-fetch": "^1.0.0"
   }
 }
