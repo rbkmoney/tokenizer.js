@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import ConfigLoader from '../loaders/ConfigLoader';
-import uuid from 'uuid-js';
 
 export default class CardTokenizer {
     static createToken(key, cardData, success, error) {
@@ -25,7 +24,7 @@ export default class CardTokenizer {
                 if (response.status >= 200 && response.status < 300) {
                     resolve(response.json());
                 } else {
-                    response.json().then(error => reject(error));
+                    reject(response);
                 }
             }).catch(() => reject('Error request to keycloak'));
         });
@@ -38,7 +37,7 @@ export default class CardTokenizer {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json; charset=utf-8',
-                    'X-Request-ID': uuid.create(),
+                    'X-Request-ID': this.guid(),
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(cardData)
@@ -46,9 +45,16 @@ export default class CardTokenizer {
                 if (response.status >= 200 && response.status < 300) {
                     resolve(response.json());
                 } else {
-                    response.json().then(error => reject(error));
+                    reject(response);
                 }
             }).catch(() => reject('Error request to CAPI'));
         });
+    }
+
+    static guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return `${s4()}${s4()}-${s4()}-${s4()}`;
     }
 }
