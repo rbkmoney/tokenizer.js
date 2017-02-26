@@ -1,4 +1,4 @@
 {
-  "capiUrl": "http://localhost:7051",
-  "keycloakUrl": "http://localhost:8080/auth"
+  "capiUrl": "https://api.rbk.money/v1",
+  "keycloakUrl": "https://auth.rbk.money/auth"
 }
