@@ -1,4 +1,3 @@
 {
-  "capiUrl": "https://api.rbk.money/v1",
-  "keycloakUrl": "https://auth.rbk.money/auth"
+  "capiEndpoint": "https://api.rbk.test:8080"
 }

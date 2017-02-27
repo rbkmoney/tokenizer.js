@@ -1,24 +1,23 @@
 import RpcConsumer from './rpc/RpcConsumer';
 import ClientInfo from './clientInfo/ClientInfo';
+import getOrigin from './utils/getOrigin';
 
 (function init() {
     const clientInfo = new ClientInfo();
-    const rpc = new RpcConsumer();
-    let publicKey;
+    const consumer = new RpcConsumer(getOrigin());
+    let accessToken;
     this.Tokenizer = {
-        setPublicKey: key => (publicKey = key),
+        setAccessToken: token => (accessToken = token),
         card: {
             createToken: (cardData, success, error) => {
-                if (publicKey) {
+                if (accessToken) {
                     const request = {
                         paymentTool: cardData,
                         clientInfo: clientInfo.getInfo()
                     };
-                    rpc.createToken(publicKey, request, success, error);
+                    consumer.createToken(accessToken, request, success, error);
                 } else {
-                    error({
-                        message: 'Public key required'
-                    });
+                    error({ message: 'Access token required' });
                 }
             }
         }
