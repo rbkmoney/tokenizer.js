@@ -1,12 +1,9 @@
 import 'whatwg-fetch';
-import Utils from '../utils/Utils';
 
 export default class ConfigLoader {
     static load() {
-        const scriptUrl = Utils.getScriptUrl();
-        const appConfigUrl = Utils.getOrigin(scriptUrl);
         return new Promise((resolve, reject) => {
-            fetch(`${appConfigUrl}/tokenizerConfig.json`, {
+            fetch('tokenizerConfig.json', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
