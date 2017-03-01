@@ -33,6 +33,6 @@ Tokenizer.card.createToken({
 }, (token) => {
     console.log(token); // { token: 'string', session: 'string' }
 }, (error) => {
-    console.error(error); // { message: 'string' }
+    console.error(error); // { code: 'string', message: 'string' }
 });
 ```
