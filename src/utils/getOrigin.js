@@ -7,7 +7,10 @@ function getScriptUrl() {
 function getOrigin() {
     const parser = document.createElement('a');
     parser.href = getScriptUrl();
-    return parser.origin;
+    const pathArray = parser.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    return `${protocol}//${host}`;
 }
 
 export default getOrigin;
