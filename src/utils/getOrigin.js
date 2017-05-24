@@ -1,3 +1,5 @@
+import URL from 'url-parse';
+
 function getScriptUrl() {
     const scripts = document.getElementsByTagName('script');
     const element = scripts[scripts.length - 1];
@@ -5,12 +7,8 @@ function getScriptUrl() {
 }
 
 function getOrigin() {
-    const parser = document.createElement('a');
-    parser.href = getScriptUrl();
-    const pathArray = parser.href.split('/');
-    const protocol = pathArray[0];
-    const host = pathArray[2];
-    return `${protocol}//${host}`;
+    const parsedUrl = new URL(getScriptUrl());
+    return parsedUrl.origin;
 }
 
 export default getOrigin;
