@@ -1,4 +1,9 @@
 import 'whatwg-fetch';
+import Promise from 'promise-polyfill';
+
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 export default class ConfigLoader {
     static load() {
