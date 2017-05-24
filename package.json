@@ -30,7 +30,6 @@
     "promise-polyfill": "^6.0.2",
     "fingerprintjs2": "^1.4.1",
     "madlib-shim-easyxdm": "^2.4.20-7",
-    "url-parse": "^1.1.8",
     "whatwg-fetch": "^1.0.0"
   }
 }
