@@ -2,6 +2,12 @@ import 'whatwg-fetch';
 import ConfigLoader from '../loaders/ConfigLoader';
 import generateGuid from '../utils/generateGuid';
 
+import Promise from 'promise-polyfill';
+
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+
 export default class CardTokenizer {
     static createToken(accessToken, cardData, success, error) {
         ConfigLoader.load().then(config => {
