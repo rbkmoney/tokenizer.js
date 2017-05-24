@@ -1,3 +1,5 @@
+import URL from 'url-parse';
+
 function getScriptUrl() {
     const scripts = document.getElementsByTagName('script');
     const element = scripts[scripts.length - 1];
