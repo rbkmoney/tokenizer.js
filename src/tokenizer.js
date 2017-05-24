@@ -17,7 +17,7 @@ import getOrigin from './utils/getOrigin';
                     };
                     consumer.createToken(accessToken, request, success, error);
                 } else {
-                    error({ message: 'Access token required' });
+                    error({message: 'Access token required'});
                 }
             }
         }

@@ -3,6 +3,7 @@ import ConfigLoader from '../loaders/ConfigLoader';
 import generateGuid from '../utils/generateGuid';
 
 export default class CardTokenizer {
+
     static createToken(accessToken, cardData, success, error) {
         ConfigLoader.load().then(config => {
             CardTokenizer.tokenize(accessToken, cardData, config.capiEndpoint)
