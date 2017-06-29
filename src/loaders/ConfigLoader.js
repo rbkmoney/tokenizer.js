@@ -8,8 +8,8 @@ export default class ConfigLoader {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            }).then(response => {
-                if (response.status >= 200 && response.status < 300) {
+            }).then((response) => {
+                if (response.status === 200) {
                     resolve(response.json());
                 } else {
                     reject(response);
