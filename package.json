@@ -10,7 +10,7 @@
   "author": "rbkmoney",
   "licenses": [],
   "scripts": {
-    "start": "webpack-dev-server --config config/webpack.dev.js --inline --progress --host 10.4.62.237 --port 7000",
+    "start": "webpack-dev-server --config config/webpack.dev.js --inline --progress --port 7000",
     "build": "rimraf dist && webpack --config config/webpack.prod.js"
   },
   "devDependencies": {
