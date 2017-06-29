@@ -1,18 +1,17 @@
 import 'whatwg-fetch';
-import ConfigLoader from '../loaders/ConfigLoader';
+import Fingerprint from 'fingerprintjs2';
 import generateGuid from '../utils/generateGuid';
 
 export default class CardTokenizer {
 
-    static createToken(accessToken, cardData, success, error) {
-        ConfigLoader.load().then(config => {
-            CardTokenizer.tokenize(accessToken, cardData, config.capiEndpoint)
-                .then(capiRes => success(capiRes))
-                .catch(cause => error(cause));
+    static createToken(capiEndpoint, accessToken, paymentTool) {
+        return CardTokenizer.getFingerprint().then((fingerprint) => {
+            const params = {paymentTool, clientInfo: {fingerprint}};
+            return CardTokenizer.createPaymentToolToken(capiEndpoint, accessToken, params);
         });
     }
 
-    static tokenize(accessToken, cardData, capiEndpoint) {
+    static createPaymentToolToken(capiEndpoint, accessToken, params) {
         return new Promise((resolve, reject) => {
             fetch(`${capiEndpoint}/v1/processing/payment_tools`, {
                 method: 'POST',
@@ -22,14 +21,19 @@ export default class CardTokenizer {
                     'X-Request-ID': generateGuid(),
                     'Authorization': `Bearer ${accessToken}`,
                 },
-                body: JSON.stringify(cardData)
-            }).then(response => {
-                if (response.status >= 200 && response.status < 300) {
+                body: JSON.stringify(params)
+            }).then((response) => {
+                if (response.status === 201) {
                     resolve(response.json());
                 } else {
                     reject(response);
                 }
-            }).catch(() => reject('Error request to api'));
+            }).catch(() => reject({message: 'Invalid request to capi'}));
         });
+    }
+
+    static getFingerprint() {
+        return new Promise((resolve) =>
+            new Fingerprint().get((fingerprint) => resolve(fingerprint)));
     }
 }
