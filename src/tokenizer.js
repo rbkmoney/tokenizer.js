@@ -1,3 +1,4 @@
+import 'core-js/es6/promise';
 import RpcConsumer from './rpc/RpcConsumer';
 import getOrigin from './utils/getOrigin';
 
