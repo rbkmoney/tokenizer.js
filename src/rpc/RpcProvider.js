@@ -13,10 +13,10 @@ export default class RpcProvider {
             });
     }
 
-    createToken(accessToken, cardData, success, error) {
+    createToken(accessToken, cardData, callback) {
         ConfigLoader.load().then((config) =>
             CardTokenizer.createToken(config.capiEndpoint, accessToken, cardData)
-                .then(capiRes => success(capiRes))
-                .catch(cause => error(cause)));
+                .then((payload) => callback({type: 'resolve', data: payload}))
+                .catch((error) => callback({type: 'reject', data: error})));
     }
 }
