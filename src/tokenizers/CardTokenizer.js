@@ -13,7 +13,7 @@ export default class CardTokenizer {
 
     static createPaymentToolToken(capiEndpoint, accessToken, params) {
         return new Promise((resolve, reject) => {
-            fetch(`${capiEndpoint}/v1/processing/payment_tools`, {
+            fetch(`${capiEndpoint}/v1/processing/payment-resources`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
