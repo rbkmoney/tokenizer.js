@@ -13,9 +13,9 @@ SERVICE_IMAGE_PUSH_TAG ?= $(SERVICE_IMAGE_TAG)
 
 # Base image for the service
 BASE_IMAGE_NAME := service-fe
-BASE_IMAGE_TAG := 768cf0f40600e290060502e047dd2e86d4fd6020
+BASE_IMAGE_TAG := 2b4570bc1d9631c10aaed2132eb87eb9003f3471
 
-BUILD_IMAGE_TAG := 629911df323f69e08de05aea7491b0a91cf4722e
+BUILD_IMAGE_TAG := a3d509385d655f6a5ada4b37c5884d5423aeb78b
 
 CALL_W_CONTAINER := init build clean submodules
 
@@ -33,7 +33,7 @@ $(SUBTARGETS): %/.git: %
 submodules: $(SUBTARGETS)
 
 init:
-	npm install
+	npm ci
 
 build:
 	npm run build
