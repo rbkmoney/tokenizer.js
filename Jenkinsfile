@@ -10,7 +10,7 @@ build('tokenizer.js', 'docker-host') {
     pipeDefault = load("${env.JENKINS_LIB}/pipeDefault.groovy")
   }
 
-  pipeDefault() {
+  def pipeline = {
     //ToDo: npm stuff should be in a cache, when caching is implemented!
     runStage('init') {
       sh 'make wc_init'
@@ -34,5 +34,6 @@ build('tokenizer.js', 'docker-host') {
       }
     }
   }
+  pipeDefault(pipeline, 'dr2.rbkmoney.com', 'jenkins_harbor')
 }
 
