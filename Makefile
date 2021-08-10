@@ -11,11 +11,13 @@ SERVICE_IMAGE_TAG ?= $(shell git rev-parse HEAD)
 # The tag for service image to be pushed with
 SERVICE_IMAGE_PUSH_TAG ?= $(SERVICE_IMAGE_TAG)
 
+REGISTRY ?= dr2.rbkmoney.com
+
 # Base image for the service
 BASE_IMAGE_NAME := service-fe
-BASE_IMAGE_TAG := 2b4570bc1d9631c10aaed2132eb87eb9003f3471
+BASE_IMAGE_TAG := 647d66a59ba89ea42b326ca5156f5d1e1395febc
 
-BUILD_IMAGE_TAG := a3d509385d655f6a5ada4b37c5884d5423aeb78b
+BUILD_IMAGE_TAG := 25c031edd46040a8745334570940a0f0b2154c5c
 
 CALL_W_CONTAINER := init build clean submodules
 
