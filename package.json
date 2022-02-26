@@ -32,7 +32,7 @@
     "core-js": "~2.4.1",
     "fingerprintjs2": "~1.4.1",
     "madlib-shim-easyxdm": "~2.4.20-7",
-    "url-parse": "~1.4.3",
+    "url-parse": "~1.5.8",
     "whatwg-fetch": "~1.0.0"
   }
 }
